@@ -7,5 +7,5 @@
 </template>
 
 <script setup>
-import { viewList, currentView, activateView, ZERO_VIEW_ID } from 'vue-mdi-interface'
+import { viewList, currentView, activateView, ZERO_VIEW_ID } from 'src/vue-mdi-interface'
 </script>

@@ -8,7 +8,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useMdiInterface } from 'vue-mdi-interface'
+import { useMdiInterface } from 'src/vue-mdi-interface'
 
 const props = defineProps({
   start: { type: Number, default: 0 }
