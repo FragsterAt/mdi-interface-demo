@@ -9,7 +9,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { onActivate, onDeactivate, useMdiInterface } from 'src/vue-mdi-interface'
+import { onActivate, onDeactivate, useMdiInterface } from 'vue-mdi-interface'
 import { useQuasar } from 'quasar'
 
 const props = defineProps({
