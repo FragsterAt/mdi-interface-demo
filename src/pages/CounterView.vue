@@ -9,7 +9,8 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useMdiInterface } from 'src/vue-mdi-interface'
+import { onActivate, onDeactivate, useMdiInterface } from 'src/vue-mdi-interface'
+import { useQuasar } from 'quasar'
 
 const props = defineProps({
   start: { type: Number, default: 0 }
@@ -18,6 +19,14 @@ const counter = ref(props.start)
 
 const { viewId, parentViewId } = useMdiInterface({
   title: computed(() => `view 1: ${counter.value}`)
+})
+
+const $q = useQuasar()
+onActivate(() => {
+  $q.notify('counter activated')
+})
+onDeactivate(() => {
+  $q.notify('counter deactivated')
 })
 
 </script>

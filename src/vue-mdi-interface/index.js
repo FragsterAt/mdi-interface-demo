@@ -1,4 +1,4 @@
-import { ref, defineComponent, h, cloneVNode, watch, nextTick, unref, toRef, toRefs } from 'vue'
+import { ref, defineComponent, h, cloneVNode, watch, nextTick, unref, toRef } from 'vue'
 
 export let ZERO_VIEW_ID = 0
 
@@ -69,6 +69,8 @@ export async function openView (name, props, uniqueKey, meta = {}, { parentViewI
   let view = viewList.value.find(v =>
     v.name === name && unref(v.uniqueKey) === unref(uniqueKey) && v.parentViewId === parentViewId
   )
+
+  console.log(viewList.value.map(v => v.uniqueKey))
 
   if (view) {
     if (!inBackground) {

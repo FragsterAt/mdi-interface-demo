@@ -32,9 +32,9 @@ export const useEntitiesStore = defineStore('entities', {
         i = this.data.findIndex(({ id }) => id === entity.id)
       }
       if (i !== -1) {
-        this.data[i] = entity
+        this.data[i] = data
       } else {
-        this.data.push(entity)
+        this.data.push(data)
       }
       console.log(i, this.data)
       return data
