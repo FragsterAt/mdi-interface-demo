@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { onActivate, onDeactivate, useMdiInterface } from 'src/vue-mdi-interface'
 import { useQuasar } from 'quasar'
 
@@ -27,6 +27,12 @@ onActivate(() => {
 })
 onDeactivate(() => {
   $q.notify('counter deactivated')
+})
+onMounted(() => {
+  $q.notify('counter mounted')
+})
+onUnmounted(() => {
+  $q.notify('counter unmounted')
 })
 
 </script>
