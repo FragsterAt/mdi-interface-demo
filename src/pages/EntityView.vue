@@ -12,9 +12,11 @@
 </template>
 
 <script setup>
-import { useMdiInterface, closeView } from 'src/vue-mdi-interface'
+import { useMdiInterface, closeView, onBeforeClose, onDeactivate } from 'src/vue-mdi-interface'
 import { useEntitiesStore } from 'stores/entities'
 import { computed, nextTick, ref, watch } from 'vue'
+import { confirmDialog } from 'src/services/support'
+import { useQuasar } from 'quasar'
 
 const props = defineProps({
   id: Number
@@ -59,5 +61,15 @@ function saveAndClose () {
   entity.value = entityStore.saveEntity(entity.value)
   closeView(viewId)
 }
+
+onBeforeClose(async () => {
+  return !modified.value || await confirmDialog({ message: 'Entity is modified, continue?', cancel: true })
+}
+)
+
+const $q = useQuasar()
+onDeactivate(() =>
+  !modified.value || $q.notify('Dont forget to save entity')
+)
 
 </script>

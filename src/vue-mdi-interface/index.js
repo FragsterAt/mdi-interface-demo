@@ -1,9 +1,31 @@
-import { ref, defineComponent, h, cloneVNode, watch, nextTick, unref, toRef } from 'vue'
+import { ref, defineComponent, h, cloneVNode, nextTick, unref, toRef, computed } from 'vue'
 
 export let ZERO_VIEW_ID = 0
 
 export const viewList = ref([])
-export const currentView = ref(ZERO_VIEW_ID)
+const _currentView = ref(ZERO_VIEW_ID)
+export const currentView = computed({
+  get: () => _currentView.value,
+  set: async (viewId) => {
+    if (_currentView.value === viewId) return
+    if (_currentView.value !== ZERO_VIEW_ID) {
+      const { hooks: { onDeactivate = () => true } } = viewById(_currentView.value) ?? {}
+      if (await onDeactivate(viewId, _currentView.value) === false) return
+    }
+
+    if (viewId !== ZERO_VIEW_ID) {
+      const view = viewById(viewId)
+      if (!view) {
+        _currentView.value = ZERO_VIEW_ID
+        return
+      }
+
+      const { hooks: { onActivate = () => true } } = view
+      if (await onActivate(_currentView.value, viewId) === false) return
+    }
+    _currentView.value = viewId
+  }
+})
 let nextId = 0
 let hookIndex
 let nextUniqueKey = 0
@@ -17,41 +39,45 @@ function viewById (id) {
   return viewList.value.find(({ viewId }) => viewId === id)
 }
 
-watch(currentView, (newId, oldId) => {
-  const { onDeactivate } = viewById(oldId) ?? {}
-  onDeactivate?.()
-  const { onActivate } = viewById(newId) ?? {}
-  onActivate?.()
-})
-
 let viewStack = []
 
 export function onActivate (fn, viewId) {
   if (hookIndex !== undefined) {
-    viewList.value[hookIndex].onActivate = fn
+    viewList.value[hookIndex].hooks.onActivate = fn
   } else if (viewId) {
     const view = viewById(viewId)
     if (!view) return
-    view.onActivate = fn
+    view.hooks.onActivate = fn
   }
 }
 export function onDeactivate (fn, viewId) {
   if (hookIndex !== undefined) {
-    viewList.value[hookIndex].onDeactivate = fn
+    viewList.value[hookIndex].hooks.onDeactivate = fn
   } else if (viewId) {
     const view = viewById(viewId)
     if (!view) return
-    view.onActivate = fn
+    view.hooks.onDeactivate = fn
   }
 }
-export function useMdiInterface ({ title, uniqueKey, onActivate, onDeactivate, meta = {} } = {}) {
+export function onBeforeClose (fn, viewId) {
+  if (hookIndex !== undefined) {
+    viewList.value[hookIndex].hooks.onBeforeClose = fn
+  } else if (viewId) {
+    const view = viewById(viewId)
+    if (!view) return
+    view.hooks.onBeforeClose = fn
+  }
+}
+
+export function useMdiInterface ({ title, uniqueKey, onActivate, onDeactivate, onBeforeClose, meta = {} } = {}) {
   const res = { currentView }
 
   if (hookIndex !== undefined) {
     const view = viewList.value[hookIndex]
     view.title = title ?? view.title
-    view.onActivate = onActivate
-    view.onDeactivate = onDeactivate
+    view.hooks.onActivate = onActivate
+    view.hooks.onDeactivate = onDeactivate
+    view.hooks.onBeforeClose = onBeforeClose
     view.uniqueKey = uniqueKey ?? view.uniqueKey
 
     Object.assign(view.meta, meta)
@@ -79,7 +105,19 @@ export async function openView (name, props, uniqueKey, meta = {}, { parentViewI
     view.props = props
     view.meta = toRef(meta)
   } else {
-    view = { component, title: name, name, meta, props: toRef(props), uniqueKey: toRef(uniqueKey), parentViewId, viewId: ++nextId, onActivate: undefined, onDeactivate: undefined }
+    view = {
+      component,
+      title: name,
+      name,
+      meta,
+      props: toRef(props),
+      uniqueKey: toRef(uniqueKey),
+      parentViewId,
+      viewId: ++nextId,
+      hooks: {
+        onActivate: undefined, onDeactivate: undefined, onBeforeClose: undefined
+      }
+    }
     viewList.value.push(view)
     hookIndex = viewList.value.length - 1
     nextTick().then(() => { hookIndex = undefined })
@@ -91,22 +129,29 @@ export async function openView (name, props, uniqueKey, meta = {}, { parentViewI
   return view.viewId
 }
 
-export function activateView (viewId = ZERO_VIEW_ID) {
-  if (viewId !== ZERO_VIEW_ID && viewById(viewId)) {
-    currentView.value = viewId
-  } else {
-    currentView.value = ZERO_VIEW_ID
+export async function activateView (viewId = ZERO_VIEW_ID, force = false) {
+  currentView.value = viewId
+  if (force && currentView.value !== viewId && viewList.value.some(v => v.viewId === viewId)) {
+    _currentView.value = viewId
   }
 }
 
-export function closeView (viewId) {
+export async function closeView (viewId) {
   const viewIndex = viewList.value.findIndex(v => v.viewId === viewId)
   if (viewIndex === -1) return
+
+  const view = viewList.value[viewIndex]
+  const { hooks: { onBeforeClose = () => true } } = view
+  const res = await onBeforeClose()
+  if (res === false) {
+    return
+  }
+
   viewList.value.filter(({ parentViewId }) => parentViewId === viewId).forEach(({ viewId }) => closeView(viewId))
 
   viewStack = viewStack.filter(i => i !== viewId)
-  if (currentView.value === viewId) {
-    currentView.value = viewStack[0] ?? ZERO_VIEW_ID
+  if (_currentView.value === viewId) {
+    _currentView.value = viewStack[0] ?? ZERO_VIEW_ID
   }
   viewList.value.splice(viewIndex, 1)
 }

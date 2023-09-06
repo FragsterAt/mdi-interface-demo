@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers'
-import { createMdiInterface, activateView, ZERO_VIEW_ID } from 'src/vue-mdi-interface'
+import { createMdiInterface, activateView } from 'src/vue-mdi-interface'
 
 const views = {
   counter: () => import('pages/CounterView.vue'),
@@ -14,6 +14,6 @@ export default boot(async ({ app, router }) => {
     views
   })
   router.beforeEach((to, from) => {
-    activateView(ZERO_VIEW_ID)
+    activateView(undefined, true)
   })
 })
