@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useMdiInterface, closeView, onBeforeClose, onDeactivate } from 'src/vue-mdi-interface'
+import { useMdiInterface, closeView, onBeforeClose, onDeactivate } from 'vue-mdi-interface'
 import { useEntitiesStore } from 'stores/entities'
 import { computed, nextTick, ref, watch } from 'vue'
 import { confirmDialog } from 'src/services/support'

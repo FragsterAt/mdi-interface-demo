@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { openView, getUniqueKey } from 'src/vue-mdi-interface'
+import { openView, getUniqueKey } from 'vue-mdi-interface'
 
 function open1 () {
   openView('counter', undefined)
