@@ -23,6 +23,6 @@ function openNewEntity () {
 }
 
 function openEntity (e, row) {
-  openView('entity', { id: row.id })
+  openView('entity', { id: row.id }, row.id)
 }
 </script>

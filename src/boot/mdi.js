@@ -4,7 +4,6 @@ import { createMdiInterface, activateView, ZERO_VIEW_ID } from 'src/vue-mdi-inte
 const views = {
   counter: () => import('pages/CounterView.vue'),
   image: () => import('pages/ImageView.vue'),
-  entities: () => import('pages/EntitiesView.vue'),
   entity: () => import('pages/EntityView.vue')
 }
 
