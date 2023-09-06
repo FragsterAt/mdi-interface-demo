@@ -1,8 +1,9 @@
 <template>
   <q-page padding>
-    <h1>View 1</h1>
-    <h3>counter: {{ counter }}</h3>
-    <q-btn @click="counter++">increase</q-btn>
+    <h3>View 1</h3>
+    <h6>view id: {{ viewId }}, parent view id: {{ parentViewId }}</h6>
+    <h4>counter: {{ counter }} <q-btn @click="counter++">increase</q-btn></h4>
+
   </q-page>
 </template>
 
@@ -15,7 +16,7 @@ const props = defineProps({
 })
 const counter = ref(props.start)
 
-useMdiInterface({
+const { viewId, parentViewId } = useMdiInterface({
   title: computed(() => `view 1: ${counter.value}`)
 })
 

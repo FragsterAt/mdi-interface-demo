@@ -5,7 +5,8 @@ const routes = [
     redirect: { name: 'index' },
     children: [
       { path: 'index', name: 'index', component: () => import('pages/IndexPage.vue') },
-      { path: 'second', name: 'second', component: () => import('pages/SecondPage.vue') }
+      { path: 'second', name: 'second', component: () => import('pages/SecondPage.vue') },
+      { path: 'entities', name: 'entities', component: () => import('pages/EntitiesPage.vue') }
     ]
   },
 

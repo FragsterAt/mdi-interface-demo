@@ -21,6 +21,7 @@
         </q-item-label>
 
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
+        <q-item>{{ view }}</q-item>
       </q-list>
     </q-drawer>
 
@@ -36,6 +37,9 @@
 import { ref } from 'vue'
 import MdiViewPanel from 'components/layout/MdiViewPanel.vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useMdiInterface } from 'src/vue-mdi-interface'
+
+const view = useMdiInterface()
 
 const essentialLinks = [
   {
@@ -49,6 +53,12 @@ const essentialLinks = [
     caption: 'second page',
     icon: 'chat',
     to: { name: 'second' }
+  },
+  {
+    title: 'Entities',
+    caption: 'entities list',
+    icon: 'view_timeline',
+    to: { name: 'entities' }
   }
 ]
 
