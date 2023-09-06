@@ -2,8 +2,14 @@ import { boot } from 'quasar/wrappers'
 import { createMdiInterface, activateView } from 'src/vue-mdi-interface'
 
 const views = {
-  counter: () => import('pages/CounterView.vue'),
-  image: () => import('pages/ImageView.vue'),
+  counter: {
+    meta: { icon: 'calculate' },
+    component: () => import('pages/CounterView.vue')
+  },
+  image: {
+    title: 'Image view',
+    component: () => import('pages/ImageView.vue')
+  },
   entity: () => import('pages/EntityView.vue')
 }
 

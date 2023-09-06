@@ -59,6 +59,7 @@ function save () {
 
 function saveAndClose () {
   entity.value = entityStore.saveEntity(entity.value)
+  modified.value = false
   closeView(viewId)
 }
 

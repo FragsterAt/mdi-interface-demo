@@ -21,7 +21,7 @@
         </q-item-label>
 
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
-        <q-item>{{ view }}</q-item>
+        <q-item>currentView: {{ currentView }}</q-item>
       </q-list>
     </q-drawer>
 
@@ -37,9 +37,7 @@
 import { ref } from 'vue'
 import MdiViewPanel from 'components/layout/MdiViewPanel.vue'
 import EssentialLink from 'components/EssentialLink.vue'
-import { useMdiInterface } from 'src/vue-mdi-interface'
-
-const view = useMdiInterface()
+import { currentView } from 'src/vue-mdi-interface'
 
 const essentialLinks = [
   {

@@ -17,6 +17,6 @@ function open1Fixed () {
   openView('counter', undefined, 'aaa')
 }
 function open2 () {
-  openView('image', getUniqueKey())
+  openView('image', undefined, getUniqueKey())
 }
 </script>

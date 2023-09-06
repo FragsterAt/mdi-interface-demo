@@ -13,6 +13,6 @@ import { openView, useMdiInterface } from 'src/vue-mdi-interface'
 
 const { viewId, parentViewId } = useMdiInterface()
 function openCounter () {
-  openView('counter', undefined, undefined, undefined, { parentViewId: viewId })
+  openView('counter', undefined, undefined, { parentViewId: viewId })
 }
 </script>
