@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { openView, useMdiInterface } from 'vue-mdi-interface'
+import { openView, useMdiInterface } from 'vue-multiview'
 
 const { viewId, parentViewId } = useMdiInterface()
 function openCounter () {

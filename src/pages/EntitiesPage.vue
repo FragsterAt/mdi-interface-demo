@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { openView } from 'vue-mdi-interface'
+import { openView } from 'vue-multiview'
 import { useEntitiesStore } from 'stores/entities'
 import { storeToRefs } from 'pinia'
 

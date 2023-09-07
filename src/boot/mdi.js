@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers'
-import { createMdiInterface, activateView } from 'vue-mdi-interface'
+import { createMdiInterface, activateView } from 'vue-multiview'
 
 const views = {
   counter: {

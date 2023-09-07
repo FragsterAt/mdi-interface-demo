@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { openView, getUniqueKey } from 'vue-mdi-interface'
+import { openView, getUniqueKey } from 'vue-multiview'
 
 function open1 () {
   openView('counter', { start: 1 })

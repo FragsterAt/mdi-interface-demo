@@ -1,6 +1,6 @@
 # MDI demo (mdi-interface-demo)
 
-demo for vue-mdi-interface
+demo for vue-multiview
 
 ## Install the dependencies
 ```bash

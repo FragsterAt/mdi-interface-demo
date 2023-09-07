@@ -37,7 +37,7 @@
 import { ref } from 'vue'
 import MdiViewPanel from 'components/layout/MdiViewPanel.vue'
 import EssentialLink from 'components/EssentialLink.vue'
-import { currentView } from 'vue-mdi-interface'
+import { currentView } from 'vue-multiview'
 
 const essentialLinks = [
   {
