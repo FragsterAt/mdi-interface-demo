@@ -9,7 +9,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { onActivate, onDeactivate, useMdiInterface } from 'vue-multiview'
+import { onActivate, onDeactivate, useMultiView } from 'src/../vue-multi-view'
 import { useQuasar } from 'quasar'
 
 const props = defineProps({
@@ -17,7 +17,7 @@ const props = defineProps({
 })
 const counter = ref(props.start)
 
-const { viewId, parentViewId } = useMdiInterface({
+const { viewId, parentViewId } = useMultiView({
   title: computed(() => `view 1: ${counter.value}`)
 })
 

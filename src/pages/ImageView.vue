@@ -9,9 +9,9 @@
 </template>
 
 <script setup>
-import { openView, useMdiInterface } from 'vue-multiview'
+import { openView, useMultiView } from 'src/../vue-multi-view'
 
-const { viewId, parentViewId } = useMdiInterface()
+const { viewId, parentViewId } = useMultiView()
 function openCounter () {
   openView('counter', undefined, undefined, { parentViewId: viewId })
 }

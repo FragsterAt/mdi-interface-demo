@@ -26,9 +26,9 @@
     </q-drawer>
 
     <q-page-container>
-      <mdi-view :show-style="{ display: 'block' }">
+      <multi-view :show-style="{ display: 'block' }">
         <router-view />
-      </mdi-view>
+      </multi-view>
     </q-page-container>
   </q-layout>
 </template>
@@ -37,7 +37,7 @@
 import { ref } from 'vue'
 import MdiViewPanel from 'components/layout/MdiViewPanel.vue'
 import EssentialLink from 'components/EssentialLink.vue'
-import { currentView } from 'vue-multiview'
+import { currentView } from 'src/../vue-multi-view'
 
 const essentialLinks = [
   {

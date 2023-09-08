@@ -16,7 +16,6 @@
     "pinia": "^2.1.6",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",
-    "vue-multiview": "^1.0.0",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers'
-import { createMdiInterface, activateView } from 'vue-multiview'
+import { createMultiView, activateView } from 'src/../vue-multi-view'
 
 const views = {
   counter: {
@@ -16,7 +16,7 @@ const views = {
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(async ({ app, router }) => {
-  app.use(createMdiInterface, {
+  app.use(createMultiView, {
     views
   })
   router.beforeEach((to, from) => {

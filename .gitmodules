@@ -1,0 +1,3 @@
+[submodule "vue-multi-view"]
+	path = vue-multi-view
+	url = https://github.com/FragsterAt/vue-multi-view.git

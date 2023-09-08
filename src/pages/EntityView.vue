@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useMdiInterface, closeView, onBeforeClose, onDeactivate } from 'vue-multiview'
+import { useMultiView, closeView, onBeforeClose, onDeactivate } from 'src/../vue-multi-view'
 import { useEntitiesStore } from 'stores/entities'
 import { computed, nextTick, ref, watch } from 'vue'
 import { confirmDialog } from 'src/services/support'
@@ -43,7 +43,7 @@ const title = computed(() => {
 })
 
 const uniqueKey = computed(() => props.id ?? entity.value.id)
-const { viewId, parentViewId } = useMdiInterface({
+const { viewId, parentViewId } = useMultiView({
   title,
   uniqueKey,
   meta: {
@@ -65,8 +65,7 @@ function saveAndClose () {
 
 onBeforeClose(async () => {
   return !modified.value || await confirmDialog({ message: 'Entity is modified, continue?', cancel: true })
-}
-)
+})
 
 const $q = useQuasar()
 onDeactivate(() =>
