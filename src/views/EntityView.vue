@@ -2,7 +2,6 @@
   <q-page padding>
     <div class="text-h3">Entity: {{ title }}</div>
     <view-info></view-info>
-    {{ uniqueKey }}
     <div class="q-my-md">
       <q-input v-model="entity.field" label="field"></q-input>
     </div>
