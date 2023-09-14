@@ -1,8 +1,10 @@
 <template>
   <q-page padding>
-    <h3 style>Page 2</h3>
+    <div class="text-h3">Entities</div>
 
-    <q-btn @click="openNewEntity" label="Create entity"></q-btn>
+    <div class="q-my-md">
+      <q-btn @click="openNewEntity" label="Create entity"></q-btn>
+    </div>
 
     <q-table :rows="data" @row-click="openEntity">
 

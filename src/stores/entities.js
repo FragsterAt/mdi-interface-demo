@@ -36,7 +36,6 @@ export const useEntitiesStore = defineStore('entities', {
       } else {
         this.data.push(data)
       }
-      console.log(i, this.data)
       return data
     }
 

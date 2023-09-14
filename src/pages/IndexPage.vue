@@ -1,22 +1,44 @@
 <template>
   <q-page padding>
-    <h3>Page 1</h3>
-    <q-btn @click="open1">Open counter with start 1</q-btn>
-    <q-btn @click="open1Unique">Open counter with unique key and start 2</q-btn>
-    <q-btn @click="open2">Open image</q-btn>
+    <div class="text-h3">Open views with buttons </div>
+    <div class="text-h6 q-my-md">Counter (simple view):</div>
+    <div class="row q-gutter-x-md q-my-md">
+      <q-btn @click="openCounter1">Open counter with start 1</q-btn>
+      <q-btn @click="openCounter2">Open counter with start 2</q-btn>
+      <q-btn @click="openCounterFixed">Open counter with fixed unique key</q-btn>
+      <q-btn @click="openCounterUnique">Open counter with new unique key</q-btn>
+    </div>
+    <div class="text-h6 q-my-md">Image (it can open child view):</div>
+    <div class="row q-gutter-x-md q-my-md">
+      <q-btn @click="openImage">Open image</q-btn>
+      <q-btn @click="openImageFixed">Open image with fixed unique key</q-btn>
+      <q-btn @click="openImageUnique">Open image with new unique key</q-btn>
+    </div>
   </q-page>
 </template>
 
 <script setup>
 import { openView, getUniqueKey } from 'src/../vue-multi-view'
 
-function open1 () {
+function openCounter1 () {
   openView('counter', { start: 1 })
 }
-function open1Unique () {
-  openView('counter', { start: 2 }, getUniqueKey())
+function openCounter2 () {
+  openView('counter', { start: 2 })
 }
-function open2 () {
+function openCounterFixed () {
+  openView('counter', undefined, 'aa')
+}
+function openCounterUnique () {
+  openView('counter', undefined, getUniqueKey())
+}
+function openImage () {
+  openView('image')
+}
+function openImageFixed () {
+  openView('image')
+}
+function openImageUnique () {
   openView('image')
 }
 </script>

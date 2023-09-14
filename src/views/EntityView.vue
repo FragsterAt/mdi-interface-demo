@@ -1,18 +1,21 @@
 <template>
   <q-page padding>
-    <h3>View 2</h3>
-    <h6>view id: {{ viewId }}, parent view id: {{ parentViewId }}, unique key: {{ uniqueKey }} <q-btn
-        @click="closeView(viewId)" round flat icon="close" /></h6>
-    <q-input v-model="entity.field" label="field"></q-input>
-    <q-btn @click="save" label="Save"></q-btn>
-    <q-btn @click="saveAndClose" label="Save and close"></q-btn>
-
-    <pre>{{ entity }}</pre>
+    <div class="text-h3">Entity: {{ title }}</div>
+    <view-info></view-info>
+    {{ uniqueKey }}
+    <div class="q-my-md">
+      <q-input v-model="entity.field" label="field"></q-input>
+    </div>
+    <div class="row q-gutter-md">
+      <q-btn @click="save" label="Save"></q-btn>
+      <q-btn @click="saveAndClose" label="Save and close"></q-btn>
+    </div>
   </q-page>
 </template>
 
 <script setup>
 import { useMultiView, closeView, onBeforeClose, onDeactivate } from 'src/../vue-multi-view'
+import ViewInfo from 'src/components/ViewInfo.vue'
 import { useEntitiesStore } from 'stores/entities'
 import { computed, nextTick, ref, watch } from 'vue'
 import { confirmDialog } from 'src/services/support'
@@ -43,7 +46,7 @@ const title = computed(() => {
 })
 
 const uniqueKey = computed(() => props.id ?? entity.value.id)
-const { viewId, parentViewId } = useMultiView({
+const { viewId } = useMultiView({
   title,
   uniqueKey,
   meta: {

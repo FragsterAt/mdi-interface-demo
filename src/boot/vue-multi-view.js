@@ -4,13 +4,13 @@ import { createMultiView, activateView } from 'src/../vue-multi-view'
 const views = {
   counter: {
     meta: { icon: 'calculate' },
-    component: () => import('pages/CounterView.vue')
+    component: () => import('../views/CounterView.vue')
   },
   image: {
     title: 'Image view',
-    component: () => import('pages/ImageView.vue')
+    component: () => import('../views/ImageView.vue')
   },
-  entity: () => import('pages/EntityView.vue')
+  entity: () => import('../views/EntityView.vue')
 }
 
 // "async" is optional;
