@@ -7,7 +7,10 @@
     <template v-if="parentViewId">
       <div class="bg-grey-2 q-pa-sm q-ml-md rounded-borders">parent view id: {{ parentViewId }}</div>
       <div>
-        <q-btn @click=" closeView(parentViewId)" round flat icon="close" title="close parent" dense />
+        <q-btn @click="currentView = parentViewId" round flat icon="login" title="activate parent" dense />
+      </div>
+      <div>
+        <q-btn @click="closeView(parentViewId)" round flat icon="close" title="close parent" dense />
       </div>
     </template>
     <div v-if="uniqueKey" class="bg-grey-2 q-pa-sm q-ml-md rounded-borders">uniqueKey: {{ uniqueKey }}</div>
@@ -16,7 +19,7 @@
 
 <script setup>
 import { useQuasar } from 'quasar'
-import { onActivate, onDeactivate, useMultiView, closeView } from 'src/../vue-multi-view'
+import { onActivate, onDeactivate, useMultiView, closeView, currentView } from 'src/../vue-multi-view'
 import { onMounted, onUnmounted, toRefs } from 'vue'
 const $q = useQuasar()
 
