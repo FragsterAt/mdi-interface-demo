@@ -27,7 +27,7 @@ function openCounter2 () {
   openView('counter', { start: 2 })
 }
 function openCounterFixed () {
-  openView('counter', undefined, 'aa')
+  openView('counter', undefined, 'fixed key')
 }
 function openCounterUnique () {
   openView('counter', undefined, getUniqueKey())
@@ -36,9 +36,9 @@ function openImage () {
   openView('image')
 }
 function openImageFixed () {
-  openView('image')
+  openView('image', undefined, 'fixed key')
 }
 function openImageUnique () {
-  openView('image')
+  openView('image', undefined, getUniqueKey())
 }
 </script>
